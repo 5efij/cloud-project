@@ -5,6 +5,11 @@ font-family:Arial;
 text-align:center;
 }
 
+h1{
+color:#00ffcc;
+margin-top:40px;
+}
+
 .stats{
 display:flex;
 justify-content:center;
@@ -13,13 +18,14 @@ margin-top:40px;
 }
 
 .card{
-background:#151b2c;
+background:#111827;
 padding:20px;
 border-radius:10px;
-width:150px;
-box-shadow:0 0 10px black;
+width:200px;
+box-shadow:0 0 10px #00ffcc;
 }
 
-h1{
+.card h2{
+font-size:35px;
 color:#00ffcc;
 }
