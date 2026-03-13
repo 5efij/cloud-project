@@ -20,5 +20,12 @@ color:"red"
 }).addTo(map)
 
 .bindPopup("Country: "+a.country+"<br>Attacks: "+a.attacks);
+setInterval(function(){
+
+var random = Math.floor(Math.random()*2000);
+
+document.getElementById("attacks").innerText = random;
+
+},3000);
 
 });
