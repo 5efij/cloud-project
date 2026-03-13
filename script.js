@@ -1,6 +1,6 @@
 var map = L.map('map').setView([20,0],2);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
 maxZoom:5
 }).addTo(map);
 
@@ -20,6 +20,9 @@ color:"red"
 }).addTo(map)
 
 .bindPopup("Country: "+a.country+"<br>Attacks: "+a.attacks);
+
+});
+
 setInterval(function(){
 
 var random = Math.floor(Math.random()*2000);
@@ -28,4 +31,16 @@ document.getElementById("attacks").innerText = random;
 
 },3000);
 
+var ctx = document.getElementById('attackChart').getContext('2d');
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels:['Phishing','Malware','DDoS','Ransomware'],
+datasets:[{
+label:'Attack Types',
+data:[540,320,380,210],
+backgroundColor:['red','orange','yellow','purple']
+}]
+}
 });
