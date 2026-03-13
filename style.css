@@ -5,27 +5,27 @@ font-family:Arial;
 text-align:center;
 }
 
-h1{
-color:#00ffcc;
-margin-top:40px;
-}
-
 .stats{
 display:flex;
 justify-content:center;
 gap:20px;
 margin-top:40px;
+flex-wrap:wrap;
 }
 
 .card{
 background:#111827;
 padding:20px;
 border-radius:10px;
-width:200px;
-box-shadow:0 0 10px #00ffcc;
+width:180px;
+box-shadow:0 0 10px cyan;
 }
 
-.card h2{
-font-size:35px;
+h1{
 color:#00ffcc;
+}
+
+ul{
+list-style:none;
+padding:0;
 }
