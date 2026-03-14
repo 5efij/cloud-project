@@ -15,8 +15,20 @@
 
 <body>
 
+<div id="loginPage">
+
+<h2>Cyber Security Login</h2>
+
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<div id="dashboard" style="display:none;">
+
 <h1>Cyber Threat Intelligence Dashboard</h1>
-<p>Live monitoring of global cyber threats</p>
 
 <div class="stats">
 
@@ -27,20 +39,31 @@
 
 <div class="card">
 <h2>540</h2>
-<p>Phishing Attacks</p>
+<p>Phishing</p>
 </div>
 
 <div class="card">
 <h2>320</h2>
-<p>Malware Attacks</p>
+<p>Malware</p>
 </div>
 
 <div class="card">
 <h2>380</h2>
-<p>DDoS Attacks</p>
+<p>DDoS</p>
 </div>
 
 </div>
+
+<h3>Filter Attack Type</h3>
+
+<select id="filter" onchange="filterAttacks()">
+
+<option value="all">All</option>
+<option value="phishing">Phishing</option>
+<option value="malware">Malware</option>
+<option value="ddos">DDoS</option>
+
+</select>
 
 <div id="map"></div>
 
@@ -48,24 +71,9 @@
 
 <canvas id="attackChart"></canvas>
 
-<h2>Most Targeted Countries</h2>
-
-<ul>
-<li>USA</li>
-<li>China</li>
-<li>Russia</li>
-<li>Germany</li>
-<li>Brazil</li>
-</ul>
-
-<h2>About This Project</h2>
-
-<p>
-This dashboard simulates global cyber attacks and visualizes cyber threats around the world.
-</p>
+</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script src="script.js"></script>
 
 </body>
