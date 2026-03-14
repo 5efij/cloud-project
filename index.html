@@ -5,30 +5,61 @@
 
 <title>Cyber Threat Intelligence Dashboard</title>
 
-<link rel="stylesheet" href="style.css">
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+background:#0b0f19;
+color:white;
+font-family:Arial;
+text-align:center;
+margin:0;
+}
+
+h1{
+color:#00ffcc;
+margin-top:20px;
+}
+
+.stats{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:40px;
+flex-wrap:wrap;
+}
+
+.card{
+background:#111827;
+padding:20px;
+border-radius:10px;
+width:180px;
+box-shadow:0 0 10px cyan;
+}
+
+#map{
+height:500px;
+margin:40px;
+border-radius:10px;
+}
+
+canvas{
+max-width:700px;
+margin:auto;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<div id="loginPage">
-
-<h2>Cyber Security Login</h2>
-
-<input type="text" id="user" placeholder="Username">
-<input type="password" id="pass" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-</div>
-
-<div id="dashboard" style="display:none;">
-
 <h1>Cyber Threat Intelligence Dashboard</h1>
+
+<p>Live monitoring of global cyber threats</p>
 
 <div class="stats">
 
@@ -57,12 +88,10 @@
 <h3>Filter Attack Type</h3>
 
 <select id="filter" onchange="filterAttacks()">
-
 <option value="all">All</option>
 <option value="phishing">Phishing</option>
 <option value="malware">Malware</option>
 <option value="ddos">DDoS</option>
-
 </select>
 
 <div id="map"></div>
@@ -71,10 +100,123 @@
 
 <canvas id="attackChart"></canvas>
 
-</div>
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="script.js"></script>
+
+<script>
+
+var map = L.map('map').setView([20,0],2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+maxZoom:5
+}).addTo(map);
+
+var attacks = [
+
+{country:"Iraq",lat:33,lon:44,type:"malware",attacks:120},
+
+{country:"USA",lat:37,lon:-95,type:"ddos",attacks:320},
+
+{country:"Germany",lat:51,lon:10,type:"phishing",attacks:150},
+
+{country:"China",lat:35,lon:105,type:"ddos",attacks:420},
+
+{country:"Brazil",lat:-14,lon:-51,type:"malware",attacks:110}
+
+];
+
+var markers=[];
+
+function drawAttacks(data){
+
+markers.forEach(m=>map.removeLayer(m));
+markers=[];
+
+data.forEach(function(a){
+
+var marker = L.circleMarker([a.lat,a.lon],{
+
+radius:8,
+color:"red",
+fillOpacity:0.8
+
+}).addTo(map)
+
+.bindPopup("Country: "+a.country+"<br>Type: "+a.type+"<br>Attacks: "+a.attacks);
+
+markers.push(marker);
+
+});
+
+}
+
+drawAttacks(attacks);
+
+function filterAttacks(){
+
+var type = document.getElementById("filter").value;
+
+if(type=="all"){
+
+drawAttacks(attacks);
+
+}
+
+else{
+
+var filtered = attacks.filter(a=>a.type==type);
+
+drawAttacks(filtered);
+
+}
+
+}
+
+setInterval(function(){
+
+var random = Math.floor(Math.random()*2000);
+
+document.getElementById("attacks").innerText = random;
+
+},3000);
+
+function simulateAttackLines(){
+
+setInterval(function(){
+
+var a = attacks[Math.floor(Math.random()*attacks.length)];
+var b = attacks[Math.floor(Math.random()*attacks.length)];
+
+var line = L.polyline([[a.lat,a.lon],[b.lat,b.lon]],{
+color:"red"
+}).addTo(map);
+
+setTimeout(function(){
+
+map.removeLayer(line);
+
+},2000);
+
+},3000);
+
+}
+
+simulateAttackLines();
+
+var ctx = document.getElementById('attackChart').getContext('2d');
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels:['Phishing','Malware','DDoS'],
+datasets:[{
+label:'Attack Types',
+data:[150,230,420],
+backgroundColor:['orange','yellow','red']
+}]
+}
+});
+
+</script>
 
 </body>
 
