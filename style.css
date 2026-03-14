@@ -3,6 +3,12 @@ background:#0b0f19;
 color:white;
 font-family:Arial;
 text-align:center;
+margin:0;
+}
+
+h1{
+color:#00ffcc;
+margin-top:20px;
 }
 
 .stats{
@@ -21,11 +27,18 @@ width:180px;
 box-shadow:0 0 10px cyan;
 }
 
-h1{
-color:#00ffcc;
+#map{
+height:500px;
+margin:40px;
+border-radius:10px;
 }
 
 ul{
 list-style:none;
 padding:0;
+}
+
+canvas{
+max-width:700px;
+margin:auto;
 }
