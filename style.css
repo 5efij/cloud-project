@@ -6,9 +6,19 @@ text-align:center;
 margin:0;
 }
 
-h1{
-color:#00ffcc;
-margin-top:20px;
+#loginPage{
+margin-top:150px;
+}
+
+input{
+padding:10px;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+background:#00ffcc;
+border:none;
 }
 
 .stats{
@@ -31,14 +41,4 @@ box-shadow:0 0 10px cyan;
 height:500px;
 margin:40px;
 border-radius:10px;
-}
-
-ul{
-list-style:none;
-padding:0;
-}
-
-canvas{
-max-width:700px;
-margin:auto;
 }
