@@ -1,0 +1,27 @@
+name: Geo Backup Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Primary Repo
+        uses: actions/checkout@v3
+
+      - name: Push to Backup Repo
+        run: |
+          git config --global user.name "backup-bot"
+          git config --global user.email "bot@example.com"
+          
+          git clone https://github.com/YOUR_USERNAME/backup-repo.git
+          rsync -av --exclude='.git' ./ backup-repo/
+          
+          cd backup-repo
+          git add .
+          git commit -m "Auto backup"
+          git push
